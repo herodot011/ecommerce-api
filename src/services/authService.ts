@@ -8,7 +8,7 @@ export class AuthService {
     async register(email: string, password: string, name: string) {
         const existingUser = await authRepository.findByEmail(email)
             if(existingUser) {
-                throw new Error('User with such email have exist yet')
+                throw new Error('User with this email already exists')
             }
             const hashedPassword = await bcrypt.hash(password, 10);
 
