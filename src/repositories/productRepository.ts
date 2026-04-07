@@ -20,7 +20,7 @@ export class ProductRepository {
         price: number
         stock: number
         categoryId: number
-    }) {
+    }) {    
         return prisma.product.create({ data })
     }
 

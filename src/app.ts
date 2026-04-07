@@ -2,6 +2,7 @@ import express from 'express'
 import authRouter from './routes/authRouter'
 import productRouter from './routes/productRoutes'
 import categoryRouter from './routes/categoryRoutes'
+import cartRouter from './routes/cartRoutes'
 
 const app = express()
 
@@ -14,6 +15,7 @@ app.get('/health', (req, res) => {
 app.use('/api/auth', authRouter)
 app.use('/api/products', productRouter)
 app.use('/api/categories', categoryRouter)
+app.use('/api/cart', cartRouter)
 
 export default app
 

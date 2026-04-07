@@ -21,7 +21,49 @@ Content-Type: application/json
     "password": "123456"
 }
 
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzc1NTc4OTI5LCJleHAiOjE3NzYxODM3Mjl9.M2DkWCs8bQfYYCsTcIJMX6Uus_lYzIRoKeec3JsxntA
+
 ###
 GET http://localhost:3000/api/products
 
 
+###
+GET http://localhost:3000/api/cart
+Authorization: Bearer {{token}}
+
+###
+POST http://localhost:3000/api/cart/items/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "quantity": 2
+}
+
+###
+POST http://localhost:3000/api/cart/items/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "quantity": 2
+}
+
+
+###
+PUT http://localhost:3000/api/cart/items/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "quantity": 1
+}
+
+
+###
+DELETE http://localhost:3000/api/cart/items/1
+Authorization: Bearer {{token}}
+
+###
+DELETE http://localhost:3000/api/cart
+Authorization: Bearer {{token}}
