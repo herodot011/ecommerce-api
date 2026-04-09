@@ -13,24 +13,14 @@ export class CartService {
 
         const existing = await this.cartRepository.getItem( cart.id, productId )
         if (existing) {
-            await this.cartRepository.updateItem( cart.id, productId, existing.quantity + quantity )
-        } else {
-            await this.cartRepository.addItem( cart.id, productId, quantity )
-        }
-
-        return this.cartRepository.getCart(userId)
-    }
-
-    async updateItem(userId: number, productId: number, quantity: number) {
-        const cart = await this.getOrCreateCart(userId)
-        const cartItem = await this.cartRepository.getItem(cart.id, productId)
-
-        if(cartItem) {
-            if (quantity <= 0) {
+            const newQuantity = existing.quantity + quantity
+            if (newQuantity <= 0) {
                 await this.cartRepository.removeItem(cart.id, productId)
             } else {
-                await this.cartRepository.updateItem(cart.id, productId, quantity)
-            }      
+                await this.cartRepository.updateItem( cart.id, productId, newQuantity)
+            }
+        } else {
+            await this.cartRepository.addItem( cart.id, productId, quantity)
         }
         return this.cartRepository.getCart(userId)
     }

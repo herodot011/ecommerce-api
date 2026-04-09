@@ -1,64 +1,119 @@
-###
-GET http://localhost:3000/health
+///User @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzc1NTc4OTI5LCJleHAiOjE3NzYxODM3Mjl9.M2DkWCs8bQfYYCsTcIJMX6Uus_lYzIRoKeec3JsxntA
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3NTY0OTAyMSwiZXhwIjoxNzc2MjUzODIxfQ.tAuaFGbdp4cX1DhkUf5orTOeR9tEmlW1_3qkd9TdlYg 
 
+
+
+
+
+
+/// CATEGORY
+
+###
+POST http://localhost:3000/api/categories
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Аксессуары"
+}
+
+###
+GET http://localhost:3000/api/categories/2
+
+###
+GET http://localhost:3000/api/categories
+
+###
+DELETE http://localhost:3000/api/categories/3
+Authorization: Bearer {{token}}
+
+
+
+
+
+
+/// PRODUCTS
+
+###
+GET http://localhost:3000/api/products
+
+###
+GET http://localhost:3000/api/products/1
+
+
+###
+POST http://localhost:3000/api/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Рубашка",
+  "price": "4099",
+  "stock": "55",
+  "categoryId": "1" 
+}
+
+###
+PUT http://localhost:3000/api/products/2
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Перчатки",
+  "price": "399",
+  "stock": "6",
+  "categoryId": "1" 
+}
+
+###
+DELETE http://localhost:3000/api/products/2
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+
+
+
+
+
+/// USER 
 
 ###
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 { 
-    "email": "test@test.com",
+    "email": "test2@test.com",
     "password": "123456",
-    "name": "Ivan"
+    "name": "Ivan2"
 }
 
 ###
 POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
-{ 
-    "email": "test@test.com",
-    "password": "123456"
+{
+  "email": "testAdmin@test.com",
+  "password": "123456"
 }
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzc1NTc4OTI5LCJleHAiOjE3NzYxODM3Mjl9.M2DkWCs8bQfYYCsTcIJMX6Uus_lYzIRoKeec3JsxntA
 
-###
-GET http://localhost:3000/api/products
 
+
+
+/// CART
 
 ###
 GET http://localhost:3000/api/cart
 Authorization: Bearer {{token}}
 
 ###
-POST http://localhost:3000/api/cart/items/1
-Authorization: Bearer {{token}}
-Content-Type: application/json
-
-{
-  "quantity": 2
-}
-
-###
-POST http://localhost:3000/api/cart/items/1
-Authorization: Bearer {{token}}
-Content-Type: application/json
-
-{
-  "quantity": 2
-}
-
-
-###
-PUT http://localhost:3000/api/cart/items/1
+POST http://localhost:3000/api/cart/items/2
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
   "quantity": 1
 }
-
 
 ###
 DELETE http://localhost:3000/api/cart/items/1
@@ -67,3 +122,33 @@ Authorization: Bearer {{token}}
 ###
 DELETE http://localhost:3000/api/cart
 Authorization: Bearer {{token}}
+
+
+
+
+/// ORDERS
+
+###
+GET http://localhost:3000/api/orders
+Authorization: Bearer {{token}}
+
+###
+GET http://localhost:3000/api/orders/all
+Authorization: Bearer {{token}}
+
+###
+POST http://localhost:3000/api/orders
+Authorization: Bearer {{token}}
+
+###
+GET http://localhost:3000/api/orders/1
+Authorization: Bearer {{token}}
+
+###
+PATCH http://localhost:3000/api/orders/1/status
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "status": "PROCESSING"
+}

@@ -26,7 +26,14 @@ export class ProductController {
 
     async create(req: AuthRequest, res: Response) {
         try {
-            const product = await productService.create(req.body)
+            const { name, description, price, stock, categoryId } = req.body
+            const product = await productService.create({
+                name,
+                description,
+                price,
+                stock: Number(stock),
+                categoryId: Number(categoryId)
+            })
             res.status(201).json(product)
         } catch (error: any) {
             res.status(400).json({ message: error.message})
@@ -35,8 +42,15 @@ export class ProductController {
 
     async update(req: AuthRequest, res: Response) {
         try {
+            const { name, description, price, stock, categoryId } = req.body
             const id = Number(req.params.id)
-            const product = await productService.update(id, req.body)
+            const product = await productService.update(id, {
+                name,
+                description,
+                price,
+                stock: stock ? Number(stock) : undefined,
+                categoryId: categoryId ? Number(categoryId) : undefined
+            })
             res.json(product)
         } catch (error: any) {
             res.status(400).json({ message: error.message })

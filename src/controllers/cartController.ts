@@ -27,18 +27,6 @@ export class CartController {
         }
     }
 
-    async updateItem(req: AuthRequest, res: Response) {
-        try {
-            const { quantity } = req.body
-            const userId = req.userId!
-            const productId = Number(req.params.productId)
-            const cart = await this.cartService.updateItem(userId, productId, quantity)
-            res.json(cart)
-        } catch (error: any) {
-            res.status(400).json({ message: error.message })
-        }
-    }
-
     async removeItem(req: AuthRequest, res: Response) {
         try {
             const userId = req.userId!
