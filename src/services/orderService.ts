@@ -48,7 +48,7 @@ export class OrderService {
         }
 
         let total = 0
-        const items = cart.items.map(item => {
+        const items = cart.items.map((item: any) => {
             const price = Number(item.product.price)
             total += price * item.quantity
             return {

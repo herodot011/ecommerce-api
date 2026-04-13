@@ -23,7 +23,7 @@ export class ProductService {
         categoryId: number
     }) {
         return productRepository.create(data);
-    }
+    } 
 
     async update(id: number, data: {
         name?: string
