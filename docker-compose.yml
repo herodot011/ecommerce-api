@@ -5,7 +5,21 @@ services:
       - "3000:3000"
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/ecommerce
-      JWT_SECRET: your_secret
+      JWT_SECRET: 122312wfdsdsf12123rfefdve2e2fev
+      REDIS_URL: redis://redis:6379  
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:                               
+        condition: service_healthy
+
+  prisma-studio:
+    build: .
+    ports:
+      - "5555:5555"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/ecommerce
+    command: npx prisma studio --hostname 0.0.0.0
     depends_on:
       db:
         condition: service_healthy
@@ -20,6 +34,14 @@ services:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  
+  redis:                                  
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
       interval: 5s
       timeout: 5s
       retries: 5

@@ -1,3 +1,4 @@
+console.log("ENV:", process.env.DATABASE_URL)
 import express from 'express'
 import authRouter from './routes/authRouter'
 import productRouter from './routes/productRoutes'
